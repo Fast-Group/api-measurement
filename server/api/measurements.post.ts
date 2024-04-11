@@ -1,4 +1,6 @@
-export default defineEventHandler((event) => {
+export default defineEventHandler( async event => {
+    const body = await readBody(event)
+    console.log(body)
     const payload = {
         "Message": "success",
         "Barcode": "YT2318522147003012",
