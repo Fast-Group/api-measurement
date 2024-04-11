@@ -1,9 +1,10 @@
 export default defineEventHandler( async event => {
     const body = await readBody(event)
+    const barcode = body.Barcode[0]
     console.log(body)
     const payload = {
         "Message": "success",
-        "Barcode": "YT2318522147003012",
+        "Barcode": barcode,
         "ChuteCode": [2]
     }
 
