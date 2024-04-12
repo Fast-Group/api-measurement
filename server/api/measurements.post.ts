@@ -14,7 +14,7 @@ export default defineEventHandler(async event => {
     const body = await readBody(event)
     // const result = MeasurementSchema.safeParse(body)
     const barcode = result.Barcode[0]
-    console.log(result)
+    console.log(body)
     const payload = {
         "Message": "success",
         "Barcode": barcode,
