@@ -5,6 +5,7 @@
     <h2>Request</h2>
     <p>POST /api/measurements</p>
     <pre>
+    {
     "Barcode": [
       "YT2318522147003012"
       ],
