@@ -13,7 +13,7 @@ const MeasurementSchema = z.object({
 export default defineEventHandler(async event => {
     const body = await readBody(event)
     // const result = MeasurementSchema.safeParse(body)
-    const barcode = result.Barcode[0]
+    const barcode = body.Barcode[0]
     console.log(body)
     const payload = {
         "Message": "success",
