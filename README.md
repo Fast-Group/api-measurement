@@ -1,26 +1,10 @@
-# Nuxt Example
-
-Deploy your [Nuxt](https://nuxt.com) project to Vercel with zero configuration.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/nuxtjs&template=nuxtjs)
-
-_Live Example: https://nuxtjs-template.vercel.app_
-
-Look at the [Nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
-
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn
-
-# npm
-npm install
-
 # pnpm
-pnpm install --shamefully-hoist
+pnpm install
 ```
 
 ## Development Server
@@ -28,7 +12,7 @@ pnpm install --shamefully-hoist
 Start the development server on http://localhost:3000
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## Production
@@ -36,13 +20,47 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment#presets) for more information.
+## Notes
+
+API call to create entry
+
+POST https://cms.fast.com.ph/api/measurements
+
+```
+{
+  "data": {
+    "barcode": "YT2318522147003012",
+    "machine_code": "PAXF-01",
+    "weight": 1.0,
+    "length": 1.0,
+    "width": 1.0,
+    "height": 1.0,
+    "request_time": "2023-06-08 15:09:29"
+  }
+}
+```
+
+API call from dimensioner 
+
+```
+{
+  "Barcode": [
+    "ACK123456"
+  ],
+  "MachineCode": "NAV-01",
+  "Weight": 1.2,
+  "Length": 1.43,
+  "Width": 2.32,
+  "Height": 12.57,
+  "RequestTime": "2023-06-08 15:09:29"
+}
+```

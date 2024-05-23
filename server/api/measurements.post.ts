@@ -13,7 +13,6 @@ const MeasurementSchema = z.object({
 export default defineEventHandler(async event => {
     const body = await readBody(event)
     const result = MeasurementSchema.safeParse(body)
-    console.log(result)
     let payload = {}
 
     if (result.success) {
@@ -23,6 +22,34 @@ export default defineEventHandler(async event => {
             "Barcode": barcode,
             "ChuteCode": [2]
         }
+        // Persist to data store
+        const data = {
+            "data": {
+                "barcode": barcode,
+                "machine_code": result.data.MachineCode,
+                "weight": result.data.Weight,
+                "length": result.data.Length,
+                "width": result.data.Width,
+                "height": result.data.Height,
+                "request_time": result.data.RequestTime
+            }
+        }
+        try {
+            const response = await $fetch('https://cms.fast.com.ph/api/measurements', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + process.env.API_KEY,
+                },
+                body: data
+            })
+        } catch (error) {
+            payload = {
+                "Message": "error",
+                "Error": error
+            }
+        }
+
     } else {
         payload = {
             "Message": "error",
@@ -32,21 +59,3 @@ export default defineEventHandler(async event => {
 
     return payload
 })
-
-// {
-//     "Barcode": [
-//         "YT2318522147003012"
-//     ],
-//         "MachineCode": "PAXF-01",
-//             "Weight": 0.0,
-//                 "Length": 0.0,
-//                     "Width": 0.0,
-//                         "Height": 0.0,
-//                             "RequestTime": "2023-06-08 15:09:29"
-// }
-
-// {
-//     "Message": "success",
-//         "Barcode": "YT2318522147003012",
-//             "ChuteCode": [2]
-// }
